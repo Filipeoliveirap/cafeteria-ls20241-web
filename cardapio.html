@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Cardápio Salento</title>
 
   <link rel="stylesheet" href="./css/footer.css">
 
@@ -48,6 +48,22 @@
       <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#produtoModal">
         +
       </button>
+
+      <!--tabela-->
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">titulo</th>
+            <th scope="col">descricao</th>
+            <th scope="col">legenda</th>
+            <th scope="col">imagem</th>
+          </tr>
+        </thead>
+        <tbody id="TableItens">
+          
+          
+        </tbody>
+      </table>
 
       <!-- Modal -->
       <div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,8 +119,8 @@
     <!-- Copyright -->
   </footer>
 
-  <script src="./js/index.js"></script>
-  <script src="./js/datahora.js"></script>
+  <script src="./js/cafeteria.js"></script>
+
   <!-- Bootstrap -->
   <script src="./node_modules/@popperjs/core/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
