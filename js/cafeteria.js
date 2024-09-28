@@ -1,3 +1,4 @@
+//Array
 let itens = [
   {
     titulo: 'Café Expresso',
@@ -37,12 +38,12 @@ if (!localStorage.getItem('produtos')) {
 
 // Função para criar os cards na página inicial
 const createCards = () => {
-  let produtos = JSON.parse(localStorage.getItem('produtos'));
+  let produtos = JSON.parse(localStorage.getItem('produtos')); // Obtém os produtos do localStorage
   for (let produto of produtos) {
-    let card = createCardItem(produto);
-    let cardsDiv = document.getElementById('cards');
+    let card = createCardItem(produto); // Cria o HTML para cada produto
+    let cardsDiv = document.getElementById('cards'); // Localiza a div onde os cards serão inseridos
     if (cardsDiv) {
-      cardsDiv.insertAdjacentHTML('beforeend', card);
+      cardsDiv.insertAdjacentHTML('beforeend', card); // Insere o card na página
     }
   }
 };
@@ -63,8 +64,8 @@ const createCardItem = (item) => {
 
 // Função para criar linhas da tabela na segunda página
 const createTableRows = () => {
-  const tableBody = document.getElementById('TableItens');
-  let produtos = JSON.parse(localStorage.getItem('produtos'));
+  const tableBody = document.getElementById('TableItens'); // Localiza o corpo da tabela onde os itens serão inseridos
+  let produtos = JSON.parse(localStorage.getItem('produtos')); // Obtém os produtos do localStorage
   if (tableBody) {
     produtos.forEach((item, index) => {
       const row = `
@@ -76,10 +77,13 @@ const createTableRows = () => {
           <td><img src="${item.imagemUrl}" alt="${item.alt}" width="150"></td>
         </tr>
       `;
-      tableBody.insertAdjacentHTML('beforeend', row);
+      tableBody.insertAdjacentHTML('beforeend', row); // Insere a linha correspondente ao produto na tabela
     });
   }
 };
+
+// Função para adicionar itens (atualmente vazia)
+const additens = () => {};
 
 // Chama a função para criar os cards ao carregar a página inicial
 createCards();
@@ -89,4 +93,39 @@ if (document.getElementById('TableItens')) {
   createTableRows();
 }
 
+// Função para adicionar itens à lista e atualizar a tabela
+const addItens = (event) => {
+  event.preventDefault(); // Previne o comportamento padrão do formulário (recarregar a página)
 
+  // Obtém os valores dos campos do formulário
+  const titulo = document.getElementById('titulo').value;
+  const descricao = document.getElementById('descricao').value;
+  const alt = document.getElementById('alt').value;
+  const imagemUrl = document.getElementById('imagemUrl').value;
+
+  // Cria um novo item
+  const novoItem = {
+    titulo,
+    descricao,
+    alt,
+    imagemUrl,
+  };
+
+  // Adiciona o novo item ao array e atualiza o localStorage
+  let produtos = JSON.parse(localStorage.getItem('produtos')); // Recupera os itens armazenados
+  produtos.push(novoItem); // Adiciona o novo item à lista
+  localStorage.setItem('produtos', JSON.stringify(produtos)); // Atualiza o localStorage com o novo item
+
+  // Atualiza as exibições (caso necessário)
+  createCards(); // Atualiza a exibição dos cards (caso essa função seja chamada)
+  creatItensTable(); // Atualiza a exibição da tabela (deve-se assegurar que essa função exista e funcione)
+
+  // Limpa o formulário
+  document.getElementById('formulario').reset(); // Reseta os campos do formulário após a submissão
+};
+
+// Adiciona o evento de submit ao formulário
+const form = document.getElementById('formulario');
+if (form) {
+  form.addEventListener('submit', addItens); // Associa a função `addItens` ao evento de submissão do formulário
+}
